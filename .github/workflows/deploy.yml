@@ -14,7 +14,6 @@ env:
   ECR_REPOSITORY: ecs-fargate-app
   ECS_SERVICE: ecs-fargate-service
   ECS_CLUSTER: ecs-fargate-cluster
-  ECS_TASK_DEFINITION: ecs-fargate-task
 
 jobs:
   deploy:
@@ -27,11 +26,10 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-        role-to-assume:arn:aws:iam::630596766849:role/GitHubActionsECSDeployRole
-         aws-region: us-east-1
+          role-to-assume: arn:aws:iam::630596766849:role/GitHubActionsECSDeployRole
+          aws-region: us-east-1
 
       - name: Login to Amazon ECR
-        id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
 
       - name: Build Docker image
@@ -49,4 +47,3 @@ jobs:
             --cluster $ECS_CLUSTER \
             --service $ECS_SERVICE \
             --force-new-deployment
-
