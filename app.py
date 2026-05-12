@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return "AWS ECS Fargate CI/CD Deployment Successful!"
+    return "CI/CD Pipeline Working!"
 
 @app.route("/health")
 def health():
