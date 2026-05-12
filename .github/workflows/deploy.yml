@@ -12,7 +12,7 @@ permissions:
 env:
   AWS_REGION: us-east-1
   ECR_REPOSITORY: ecs-fargate-app
-  ECS_SERVICE: ecs-fargate-service
+  ECS_SERVICE: ecs-fargate-task-service-wg3b8wb1
   ECS_CLUSTER: ecs-fargate-cluster
 
 jobs:
