@@ -12,17 +12,20 @@ def home():
 def health():
     return {"status": "healthy"}, 200
 
-@app.route("/db-test")
-def db_test():
+@app.route("/create-db")
+def create_db():
     try:
         connection = pymysql.connect(
             host=os.environ["DB_HOST"],
             user=os.environ["DB_USER"],
             password=os.environ["DB_PASSWORD"],
-            database=os.environ["DB_NAME"],
             connect_timeout=5
         )
+        cursor = connection.cursor()
+        cursor.execute("CREATE DATABASE IF NOT EXISTS appdb")
+        connection.commit()
+        cursor.close()
         connection.close()
-        return "RDS Connected Successfully!"
+        return "Database appdb created successfully!"
     except Exception as e:
-        return f"RDS Connection Failed: {str(e)}", 500
+        return f"Create DB Failed: {str(e)}", 500
