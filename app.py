@@ -12,7 +12,7 @@ def home():
 def health():
     return {"status": "healthy"}, 200
 
-@app.route("/create-db")
+@app.route("/db-test")
 def create_db():
     try:
         connection = pymysql.connect(
