@@ -3,50 +3,170 @@
 ## Architecture diagram
   <img width="1408" height="768" alt="Architecture diagram" src="https://github.com/user-attachments/assets/c095f567-ce62-4d66-bd01-397064941cdb" />
 
-## Overview
-Built and deployed a production-style containerized application on AWS using ECS Fargate with a secure GitHub Actions CI/CD pipeline.
+## Project Overview
 
-## Tech Stack
-- AWS ECS
-- AWS Fargate
-- Amazon ECR
-- Application Load Balancer
-- ACM SSL
-- GitHub Actions
-- Docker
-- Flask
-- GoDaddy DNS
-- IAM OIDC Authentication
+This project demonstrates a production-style full stack cloud architecture deployed on AWS using modern DevOps practices.
 
-## Features
-- Dockerized Flask application
-- Automated CI/CD pipeline
-- HTTPS custom domain
-- Load balancer routing
-- Health checks
-- Multi-service architecture
-- Host-based routing using subdomains
-- Secure OIDC authentication
+The architecture includes:
+
+* React frontend hosted on Amazon S3
+* CloudFront CDN integration
+* Cloudflare DNS management
+* Flask backend API deployed on Amazon ECS Fargate
+* Docker containerization
+* GitHub Actions CI/CD pipeline
+* Amazon ECR image registry
+* Application Load Balancer with HTTPS
+* ACM SSL certificate integration
+* Amazon RDS MySQL database
+* Secure VPC networking and security groups
+
+---
 
 ## Architecture
-GitHub → GitHub Actions → ECR → ECS Fargate → ALB → HTTPS Domain
 
-## Live URLs
-- https://www.rehmanilyas.site
-- https://app.rehmanilyas.site
+```text
+Frontend (React + S3 + CloudFront)
+        ↓
+Cloudflare DNS
+        ↓
+Application Load Balancer (HTTPS)
+        ↓
+Amazon ECS Fargate Backend
+        ↓
+Amazon RDS MySQL
+```
 
-## CI/CD Workflow
-1. Push code to GitHub
-2. GitHub Actions builds Docker image
-3. Pushes image to Amazon ECR
-4. ECS service automatically updates
-5. Application deployed through Fargate
+---
 
-## Security
-- IAM roles
-- OIDC authentication
-- HTTPS SSL certificates
-- Private container registry
+## Tech Stack
+
+* AWS ECS Fargate
+* AWS ECR
+* AWS RDS MySQL
+* AWS S3
+* AWS CloudFront
+* Application Load Balancer
+* AWS ACM
+* Docker
+* GitHub Actions
+* Flask
+* React
+* Cloudflare
+* Python
+* PyMySQL
+
+---
+
+## Features
+
+* End-to-end CI/CD pipeline
+* Dockerized backend deployment
+* Secure HTTPS configuration
+* Host-based routing
+* REST API integration
+* React frontend integration
+* Form submission and database persistence
+* Cloud-native infrastructure
+* Health checks and load balancing
+* Production-style deployment architecture
+
+---
+
+## API Endpoints
+
+### Health Check
+
+```bash
+GET /health
+```
+
+### Get Leads
+
+```bash
+GET /api/leads
+```
+
+### Create Lead
+
+```bash
+POST /api/leads
+```
+
+---
+
+## Frontend
+
+Frontend application is deployed using:
+
+* Amazon S3 Static Hosting
+* Amazon CloudFront
+* Cloudflare DNS
+
+Frontend URL:
+
+```text
+https://frontend.rehmanilyas.site
+```
+
+---
+
+## Backend
+
+Backend API is deployed on:
+
+* Amazon ECS Fargate
+* Application Load Balancer
+* Docker containers
+
+Backend URL:
+
+```text
+https://www.rehmanilyas.site
+```
+
+---
+
+## Database
+
+Amazon RDS MySQL is used for persistent data storage.
+
+Security configuration:
+
+* Private database access
+* Security group restricted to ECS tasks only
+* No public database exposure
+
+---
+
+## CI/CD Pipeline
+
+```text
+GitHub Actions
+    ↓
+Docker Build
+    ↓
+Amazon ECR
+    ↓
+Amazon ECS Fargate Deployment
+```
+
+---
+
+## Deployment Highlights
+
+* Secure SSL integration using AWS ACM
+* Custom domain configuration
+* Cloud-native scalable architecture
+* Automated deployments through GitHub Actions
+* Frontend and backend separation
+* Production-style infrastructure design
+
+---
+
+## Author
+
+Rehman Ilyas
 
 
 ## ECP Repo
