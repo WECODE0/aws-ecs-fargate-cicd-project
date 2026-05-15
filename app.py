@@ -5,6 +5,15 @@ import pymysql
 
 
 app = Flask(__name__)
+CORS(app, origins=[
+    "https://frontend.rehmanilyas.site",
+    "https://www.rehmanilyas.site",
+    "https://rehmanilyas.site"
+])
+
+
+
+
 CORS(app)
 def get_connection():
     return pymysql.connect(
