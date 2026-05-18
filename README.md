@@ -1,172 +1,160 @@
 # AWS ECS Fargate CI/CD Project
 
+A production-style AWS DevOps project demonstrating containerized application deployment, CI/CD automation, HTTPS custom domain integration, and event-driven ECS auto-start/auto-stop infrastructure optimization.
+
 ## Architecture diagram
   <img width="1408" height="768" alt="Architecture diagram" src="https://github.com/user-attachments/assets/c095f567-ce62-4d66-bd01-397064941cdb" />
 
-## Project Overview
-
-This project demonstrates a production-style full stack cloud architecture deployed on AWS using modern DevOps practices.
-
-The architecture includes:
-
-* React frontend hosted on Amazon S3
-* CloudFront CDN integration
-* Cloudflare DNS management
-* Flask backend API deployed on Amazon ECS Fargate
-* Docker containerization
-* GitHub Actions CI/CD pipeline
-* Amazon ECR image registry
-* Application Load Balancer with HTTPS
-* ACM SSL certificate integration
-* Amazon RDS MySQL database
-* Secure VPC networking and security groups
-
 ---
 
-## Architecture
+# Project Architecture
 
 ```text
-Frontend (React + S3 + CloudFront)
+Frontend (S3 Static Hosting)
         ↓
-Cloudflare DNS
+API Gateway Wakeup Endpoint
         ↓
-Application Load Balancer (HTTPS)
+AWS Lambda
         ↓
 Amazon ECS Fargate Backend
         ↓
-Amazon RDS MySQL
+Application Load Balancer
+        ↓
+RDS MySQL Database
 ```
 
----
-
-## Tech Stack
-
-* AWS ECS Fargate
-* AWS ECR
-* AWS RDS MySQL
-* AWS S3
-* AWS CloudFront
-* Application Load Balancer
-* AWS ACM
-* Docker
-* GitHub Actions
-* Flask
-* React
-* Cloudflare
-* Python
-* PyMySQL
-
----
-
-## Features
-
-* End-to-end CI/CD pipeline
-* Dockerized backend deployment
-* Secure HTTPS configuration
-* Host-based routing
-* REST API integration
-* React frontend integration
-* Form submission and database persistence
-* Cloud-native infrastructure
-* Health checks and load balancing
-* Production-style deployment architecture
-
----
-
-## API Endpoints
-
-### Health Check
-
-```bash
-GET /health
-```
-
-### Get Leads
-
-```bash
-GET /api/leads
-```
-
-### Create Lead
-
-```bash
-POST /api/leads
-```
-
----
-
-## Frontend
-
-Frontend application is deployed using:
-
-* Amazon S3 Static Hosting
-* Amazon CloudFront
-* Cloudflare DNS
-
-Frontend URL:
+## Auto Stop Workflow
 
 ```text
-https://frontend.rehmanilyas.site
+No Traffic on ALB
+        ↓
+CloudWatch Alarm
+        ↓
+EventBridge Rule
+        ↓
+AWS Step Functions
+        ↓
+Lambda Function
+        ↓
+ECS Desired Count = 0
+```
+
+## Auto Start Workflow
+
+```text
+Frontend Page Load
+        ↓
+React useEffect Trigger
+        ↓
+API Gateway /wakeup
+        ↓
+Lambda Function
+        ↓
+ECS Desired Count = 1
 ```
 
 ---
 
-## Backend
+# Features
 
-Backend API is deployed on:
+* Dockerized Flask backend
+* React + Vite frontend
+* AWS ECS Fargate deployment
+* Amazon ECR image management
+* GitHub Actions CI/CD pipeline
+* HTTPS custom domain with ACM SSL
+* Application Load Balancer integration
+* AWS Lambda-based ECS scaling
+* CloudWatch traffic monitoring
+* EventBridge automation
+* AWS Step Functions orchestration
+* ECS automatic stop on idle traffic
+* ECS automatic wake-up on frontend access
+* CORS handling between frontend and backend
+* Production-style serverless-inspired architecture
+* Cost optimization using scale-to-zero strategy
+
+---
+
+# AWS Services Used
 
 * Amazon ECS Fargate
+* Amazon ECR
+* AWS Lambda
+* Amazon API Gateway
+* AWS Step Functions
+* Amazon EventBridge
+* Amazon CloudWatch
 * Application Load Balancer
-* Docker containers
-
-Backend URL:
-
-```text
-https://www.rehmanilyas.site
-```
+* AWS Certificate Manager (ACM)
+* Amazon Route 53 / GoDaddy DNS
+* Amazon S3 Static Hosting
+* Amazon RDS MySQL
+* GitHub Actions
 
 ---
 
-## Database
-
-Amazon RDS MySQL is used for persistent data storage.
-
-Security configuration:
-
-* Private database access
-* Security group restricted to ECS tasks only
-* No public database exposure
-
----
-
-## CI/CD Pipeline
+# CI/CD Workflow
 
 ```text
+GitHub Push
+    ↓
 GitHub Actions
     ↓
-Docker Build
+Docker Image Build
     ↓
-Amazon ECR
+Push Image to Amazon ECR
     ↓
-Amazon ECS Fargate Deployment
+Update ECS Service
+    ↓
+Automatic Deployment
 ```
 
 ---
 
-## Deployment Highlights
+# Tech Stack
 
-* Secure SSL integration using AWS ACM
-* Custom domain configuration
-* Cloud-native scalable architecture
-* Automated deployments through GitHub Actions
-* Frontend and backend separation
-* Production-style infrastructure design
+* Python Flask
+* React
+* Vite
+* Docker
+* AWS ECS
+* AWS Fargate
+* GitHub Actions
+* MySQL
+* Nginx
+* AWS Lambda
 
 ---
 
-## Author
+# Key Learning Outcomes
+
+* Implemented production-grade container deployment on AWS
+* Built automated CI/CD pipelines using GitHub Actions
+* Configured HTTPS custom domains with SSL certificates
+* Implemented event-driven infrastructure automation
+* Designed ECS scale-to-zero architecture for cost optimization
+* Integrated CloudWatch, EventBridge, Step Functions, and Lambda
+* Handled frontend/backend CORS communication securely
+
+---
+
+# Future Improvements
+
+* Add authentication and authorization
+* Implement Terraform infrastructure as code
+* Add monitoring dashboards with CloudWatch
+* Add autoscaling based on CPU and memory utilization
+* Implement blue/green deployments
+
+---
+
+# Author
 
 Rehman Ilyas
+
+LinkedIn:
+https://www.linkedin.com/in/rehman-ilyas
 
 
 ## ECP Repo
